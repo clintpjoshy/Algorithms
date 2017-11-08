@@ -1,0 +1,39 @@
+<html>
+  <body>
+    <script>
+      var A = [3, 1, 34, 35, 53, 40, 0];
+      var maxHeapify = function(A, i, heapSize) {
+        var largest = 0;
+        var l = 2 * i + 1;
+        var r = 2 * i + 2;
+
+        if (l <= heapSize && A[l] > A[i]) {
+          largest = l; 
+        } else {
+          largest = i;
+        }
+
+        if (r <= heapSize && A[r] > A[largest]) {
+          largest = r;
+        }
+
+        if (largest !== i) {
+          var temp = A[i];
+          A[i] = A[largest];
+          A[largest] = temp;
+          maxHeapify(A, largest, heapSize);
+        }
+      };
+
+      var buildMaxHeap = function(A) {
+        var heapSize = A.length - 1; 
+        for (var i = Math.floor(A.length / 2); i >= 0; i--) {
+          maxHeapify(A, i, heapSize);
+        }
+      };
+      buildMaxHeap(A);
+
+      console.log(A);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+  <body>
+    <script>
+      var A = {
+	8: {
+	  val: 8,
+	  left: 3,
+	  right: 10
+	},
+	3: {
+	  val: 3,
+	  left: 1,
+	  right: 6
+	},
+	1: {
+	  val: 1,
+	  left: '',
+	  right: '' 
+	},
+	6: {
+	  val: 6,
+	  left: 4,
+	  right: 7
+	},
+	10: {
+	  val: 10,
+	  left: '',
+	  right: 14 
+	},
+	4: {
+	  val: 4,
+	  left: '',
+	  right: ''
+	},
+	7: {
+	  val: 7,
+	  left: '',
+	  right: ''
+	},
+	14: {
+	  val: 14,
+	  left: 13,
+	  right: ''
+	},
+	13: {
+	  val: 13,
+	  left: '',
+	  right: ''
+	}
+      };
+
+      function iterativeTreeSearch(x, key) {
+        while (x && key !== x.val) {
+          if (key < x.val) {
+            x = A[x.left];
+          } else {
+            x = A[x.right];
+          }
+        }
+console.log(x);
+        return x;
+      }
+      iterativeTreeSearch(A[8], 13);
+      console.log(A);
+    </script>
+  </body>
+</html>

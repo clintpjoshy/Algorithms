@@ -1,0 +1,109 @@
+<html>
+  <body>
+    <script>
+      var A = {
+	root: {
+	  val: 8,
+	  left: 3,
+	  right: 10,
+          parent: ''
+	},
+	8: {
+	  val: 8,
+	  left: 3,
+	  right: 10,
+          parent: ''
+	},
+	3: {
+	  val: 3,
+	  left: 1,
+	  right: 6,
+          parent: 8
+	},
+	1: {
+	  val: 1,
+	  left: '',
+	  right: '',
+          parent: 3
+	},
+	6: {
+	  val: 6,
+	  left: 4,
+	  right: 7,
+          parent: 3
+	},
+	10: {
+	  val: 10,
+	  left: '',
+	  right: 14,
+          parent: 8 
+	},
+	4: {
+	  val: 4,
+	  left: '',
+	  right: '',
+          parent: 6
+	},
+	7: {
+	  val: 7,
+	  left: '',
+	  right: '',
+          parent: 6
+	},
+	14: {
+	  val: 14,
+	  left: 13,
+	  right: '',
+          parent: 10
+	},
+	13: {
+	  val: 13,
+	  left: '',
+	  right: '',
+          parent: 14
+	}
+      };
+
+      function treeDelete(T, z) {
+        if (!z.left) {
+          transplant(T, z, T[z.right])
+        } else if (!z.right) {
+          transplant(T, z, T[z.left])
+        } else {
+          var y = treeMinimum(T, T[z.right]);
+          if (y.parent !== z.val) {
+            transplant(T, y, T[y.right]);
+            y.right = z.right;
+            T[y.right].parent = y.val;
+          }
+          transplant(T, z, y);
+          y.left = z.left;
+          T[y.left].parent = y.val;
+        }
+      }
+
+      function transplant(T, u, v) {
+        if (!u.parent) {
+          T.root = v; 
+        } else if (u.val === T[u.parent].left) {
+          T[u.parent].left = v ? v.val : '';
+        } else {
+          T[u.parent].right = v ? v.val : '';
+        }
+
+        if ( v && v.val) {
+          v.parent = u.parent;
+        }
+      }
+
+      function treeMinimum(T, x) {
+        while (x.left) {
+          x = T[x.left];
+        }
+        return x;
+      }
+      treeDelete(A, A[3]);
+console.log(A);
+    </script>
+  </body>
+</html>

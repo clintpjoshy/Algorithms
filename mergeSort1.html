@@ -1,0 +1,51 @@
+<html>
+  <body>
+    <script>
+      var A = [100, 30, 4, 34, 2, 9, 0, 5];
+      var p = 0;
+      var r = A.length - 1;
+      function merge(A, p, q, r) {
+        var n1 = q - p + 1;
+        var n2 = r - q;
+        var L = [];
+        var R = [];
+        var i = 0;
+        var j = 0;
+
+        while (i < n1) {
+          L[i] = A[p + i];
+          i++;
+        }
+        while (j < n2) {
+          R[j] = A[q + j + 1];
+          j++;
+        }
+        L.push(100000000);
+        R.push(100000000);
+        i = 0;
+        j = 0;
+
+        for (var k = p; k <= r; k++) {
+          if (L[i] > R[j]) {
+            A[k] = R[j];
+            j++;
+          } else {
+            A[k] = L[i];
+            i++;
+          }
+        }
+      }
+
+      function mergeSort(A, p, r) {
+        if (p < r) {
+          var q = Math.floor((p + r) / 2);
+          mergeSort(A, p, q);
+          mergeSort(A, q + 1, r);
+          merge(A, p, q, r);
+        }
+      }
+      mergeSort(A, p, r);
+      console.log(A);
+    </script>
+  </body>
+</html>

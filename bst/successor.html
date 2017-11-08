@@ -1,0 +1,84 @@
+<html>
+  <body>
+    <script>
+      var A = {
+	8: {
+	  val: 8,
+	  left: 3,
+	  right: 10,
+          parent: ''
+	},
+	3: {
+	  val: 3,
+	  left: 1,
+	  right: 6,
+          parent: 8
+	},
+	1: {
+	  val: 1,
+	  left: '',
+	  right: '',
+          parent: 3
+	},
+	6: {
+	  val: 6,
+	  left: 4,
+	  right: 7,
+          parent: 3
+	},
+	10: {
+	  val: 10,
+	  left: '',
+	  right: 14,
+          parent: 8 
+	},
+	4: {
+	  val: 4,
+	  left: '',
+	  right: '',
+          parent: 6
+	},
+	7: {
+	  val: 7,
+	  left: '',
+	  right: '',
+          parent: 6
+	},
+	14: {
+	  val: 14,
+	  left: 13,
+	  right: '',
+          parent: 10
+	},
+	13: {
+	  val: 13,
+	  left: '',
+	  right: '',
+          parent: 14
+	}
+      };
+
+      function treeSuccessor(x) {
+        if (x.right !== '') {
+          return minimum(A[x.right]);
+        }
+        var y = A[x.parent];
+        while (A[y.parent] !== '' && A[x.val] === A[y.right]) {
+          x = y;
+          y = A[y.parent];
+        }
+console.log(y);
+        return y;
+      }
+      treeSuccessor(A[3]);
+
+      function minimum(x) {
+        while (x.left) {
+          x = A[x.left];
+        }
+console.log(x);
+        return x;
+      }
+    </script>
+  </body>
+</html>

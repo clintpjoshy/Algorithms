@@ -1,0 +1,63 @@
+<html>
+  <body>
+    <script>
+      var A = {
+	8: {
+	  val: 8,
+	  left: 3,
+	  right: 10
+	},
+	3: {
+	  val: 3,
+	  left: 1,
+	  right: 6
+	},
+	1: {
+	  val: 1,
+	  left: '',
+	  right: '' 
+	},
+	6: {
+	  val: 6,
+	  left: 4,
+	  right: 7
+	},
+	10: {
+	  val: 10,
+	  left: '',
+	  right: 14 
+	},
+	4: {
+	  val: 4,
+	  left: '',
+	  right: ''
+	},
+	7: {
+	  val: 7,
+	  left: '',
+	  right: ''
+	},
+	14: {
+	  val: 14,
+	  left: 13,
+	  right: ''
+	},
+	13: {
+	  val: 13,
+	  left: '',
+	  right: ''
+	}
+      };
+
+      function minimum(x) {
+        while (x.left) {
+          x = A[x.left];
+        }
+console.log(x);
+        return x;
+      }
+      minimum(A[8]);
+      console.log(A);
+    </script>
+  </body>
+</html>

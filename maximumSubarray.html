@@ -1,0 +1,94 @@
+<html>
+  <body>
+    <script>
+/* divide and conquer. Doesn't work  check this again later. Brute force works but not d&c*/
+      var A = [3, -5, 2, 4, 5, 20, -9, 4, 9, -5, -4, 5, 3, -5, 2, 4, 5, 20, -9, 4, 9, -5, -4, 5];
+      var p = 0;
+      var r = A.length - 1;
+      function crossing(A, p, q, r) {
+        var temp = Number.NEGATIVE_INFINITY;
+        var left = Number.NEGATIVE_INFINITY;
+        var right = Number.NEGATIVE_INFINITY;
+        var min_cross = 0;
+        var max_cross = 0;
+        var sum = 0;
+        for(var i = q; i >= p; i--) {
+          sum = sum + A[i];
+          if (sum > left) {
+            min_cross = i;
+            left = sum;
+          }
+        }
+        sum = 0;
+        for(var i = q + 1; i <= r; i++) {
+          sum = sum + A[i];
+          if (sum > right) {
+            max_cross = i;
+            right = sum;
+          }
+        }  
+        if (temp > (left + right)) {
+          temp = left + right;
+        }
+        return [max_cross, min_cross, (left + right)];
+      }
+      function sub(A, p, r) {
+        if (p === r) {
+          return [p, r, A[p]];
+        } else {
+          var q = Math.floor((p + r ) / 2);
+          var left = sub(A, p, q);
+          var right = sub(A, q + 1, r);
+          var cross = crossing(A, p, q, r);
+          if (left[2] >= right[2] && left[2] >= cross[2]) {
+            console.log(left);
+            return (left);
+          } else if ( right[2] >= left[2] && right[2] >= cross[2] ) {
+            console.log(right);
+            return (right);
+          } else {
+            console.log(cross);
+            return cross;
+          }
+        }
+      }
+console.time('recursive');
+console.log(sub(A, p, r));
+console.timeEnd('recursive');
+
+/* Brute force for maximum subarray */
+/*
+    function maxSub(A) {
+      var finalSum = Number. NEGATIVE_INFINITY;
+      var left = 0;
+      var right = 0;
+      var tempSum = 0;
+      var sum = 0;
+      var j = 0;
+      var i;
+        for(i = 0; i < A.length - 1; i++) {
+          tempSum = A[i];
+          j = i + 1;
+          while(j < A.length) {
+            sum = tempSum + A[j];
+            if (sum > tempSum) {
+              tempSum = sum;
+            } else {
+              break;
+            }
+            j++;
+          }
+          if(tempSum > finalSum) {
+            left = i; 
+            right = j - 1;
+            finalSum = tempSum;
+          }
+        }
+        return{finalSum, left, right};
+      }
+console.time('start');
+   console.log( maxSub(A));
+console.timeEnd('start');*/
+    </script>
+  </body>
+</html>
